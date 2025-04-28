@@ -31,26 +31,52 @@ inline bool operator< (const ClassObj& lhs, const ClassObj& rhs) { return lhs.va
 
 int main(int argc, char *argv[])
 {
-
-    size_t m = 10000;
-
-    vector<int> v1(m);
-
-    // cout << "v1: " << endl;
-    // cout << ArrayToString(v1) << endl;
-
+	
+	cout << "argc: " << argc << endl;
+	for (int a = 0; a < argc; a++) 
+		cout << argv[a] << " ";
+	cout << endl;
+	
+    size_t m = 10;
+	if (argc > 1)
+	{
+		istringstream convert(argv[1]);
+		convert >> m;
+		cout << "use value: " << m << endl;
+	}
+	else 
+		cerr << "use default value: " << m << endl;
+	
+	// GENERAZIONE DI VETTORI
+	vector<int> v1(m);
+	iota(v1.begin(), v1.end(), -4);	// vettore che parte da -4 e aumenta di 1 fino a riempire tutti gli m posti
+    cout << "v1: " << ArrayToString(v1) << endl;
+	
+	srand(2);
     vector<double> v2(m);
-
-    // cout << "v2: " << endl;
-    // cout << ArrayToString(v2) << endl;
+	for (size_t i = 0; i < m; i++)
+		v2[i] = rand() / ((double)RAND_MAX);
+    cout << "v2: " << ArrayToString(v2) << endl;
 
     vector<int> v3(m, 0);
-
-    // cout << "v3: " << endl;
-    // cout << ArrayToString(v3) << endl;
+	for (size_t i = floor(m*0.5) + 1; i < m; i++)
+		v3[i] = rand()%1000;
+	copy(v1.begin(), v1.begin() + floor(m * 0.5) + 1, v3.begin());
+    cout << "v3: " << ArrayToString(v3) << endl;
+	
+	// https://www.epochconverter.com/
+	const auto today_time = chrono::system_clock::now();
+	cout << "Tempo trascorso dal 1 gennaio 1970: "	
+		 << chrono::duration_cast<chrono::milliseconds>(today_time.time_since_epoch()).count() << endl;
 
 
     unsigned int num_experiment = 100;
+	
+	// Try commenting out the overloading of the "<" operator and uncommenting the two lines below:
+    // an error will be reported because ClassObj is not "Sortable"
+
+    // vector<ClassObj> v;
+    // SortLibrary::SelectionSort<ClassObj>(v); // ATTENZIONE: il vettore è non inizializzato -> non eseguire
 
     double time_elapsed_selection_v1 = 0.0;
     for(unsigned int t = 0; t < num_experiment; t++)

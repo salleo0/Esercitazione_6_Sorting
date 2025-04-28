@@ -19,7 +19,7 @@ void SelectionSort(std::vector<T>& v)
 	for (unsigned int i = 0; i < n - 1; i++)
 	{
 		unsigned int min_index = i;
-		for unsigned int j = i + 1; j < n; j++)
+		for (unsigned int j = i + 1; j < n; j++)
 		{
 			if (v[j] < v[min_index])
 				min_index = j;
