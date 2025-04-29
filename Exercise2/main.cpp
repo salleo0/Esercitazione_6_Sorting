@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 	
 	unsigned int num_experiment = 100;
 	
-	//BUBBLE SORT
+	// ------BUBBLE SORT------
 	double time_elapsed_bubble_v1 = 0.0;
     for(unsigned int t = 0; t < num_experiment; t++)
     {
@@ -108,7 +108,8 @@ int main(int argc, char *argv[])
     time_elapsed_bubble_v3 /= num_experiment;
 
     cout << "Bubble Sort - v3: " << time_elapsed_bubble_v3 << endl;
-
+	
+	// ------HEAP SORT------
     double time_elapsed_heap_v1 = 0.0;
     for(unsigned int t = 0; t < num_experiment; t++)
     {
